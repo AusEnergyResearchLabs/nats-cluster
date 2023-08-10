@@ -8,13 +8,19 @@ primary_region = "syd"
 
 [build]
 
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = false
-  auto_start_machines = true
-  min_machines_running = 1
-  processes = ["app"]
+[[mounts]]
+  source = "jetstream"
+  destination = "/data"
+
+[checks]
+  [checks.health]
+    port = 8222
+    type = "http"
+    interval = "10s"
+    timeout = "10s"
+    grace_period = "30s"
+    method = "GET"
+    path = "/"
 
 [metrics]
   port = 7777

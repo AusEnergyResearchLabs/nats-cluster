@@ -27,7 +27,7 @@ func main() {
 
 	svisor.AddProcess(
 		"exporter",
-		"nats-exporter -varz 'http://fly-local-6pn:8222'",
+		"nats-exporter -healthz -jsz all -varz 'http://fly-local-6pn:8222'",
 		supervisor.WithRestart(0, 1*time.Second),
 	)
 
